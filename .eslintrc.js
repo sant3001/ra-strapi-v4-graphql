@@ -31,7 +31,8 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    'sort-imports': ['error'],
-    'import/no-unresolved': [2, { commonjs: true }],
+  },
+  settings: {
+    'import/resolver': { typescript: true },
   },
 };
