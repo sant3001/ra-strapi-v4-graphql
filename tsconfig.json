@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "esnext",
     "module": "commonjs",
-    "outDir": "lib",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
-    "removeComments": true,
-    "noLib": false,
-    "rootDir": "src",
-    "allowJs": false,
-    "lib": ["es2017", "dom"],
+    "lib": ["es2023", "dom"],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "allowJs": false
   },
   "include": ["src"],
   "exclude": [

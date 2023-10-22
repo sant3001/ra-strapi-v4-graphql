@@ -1,6 +1,6 @@
 import { jsonToGraphQLQuery, VariableType } from 'json-to-graphql-query';
 import { request, Variables } from 'graphql-request';
-import camelCase from 'lodash/camelCase';
+import { camelCase } from 'lodash';
 import { plural, singular } from 'pluralize';
 import { BuildGraphQLQueryOpts, Operation } from './types';
 
@@ -86,5 +86,6 @@ export const buildAndRequestGraphQLQuery = async <TResult>(opts: BuildGraphQLQue
     variables,
     requestHeaders: getJwtHeader(),
   });
-  return response?.[queryName];
+  const result: TResult = response?.[queryName];
+  return result;
 };

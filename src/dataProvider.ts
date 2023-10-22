@@ -50,7 +50,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
     async deleteMany<RecordType extends RaRecord>(resource: string, params: DeleteManyParams<RecordType>): Promise<DeleteManyResult<RecordType>> {
       const { ids, meta } = params;
       const deleted = await Promise.all(
-        (ids || []).map(async (id): Promise<string> => {
+        (ids || []).map(async (id: Identifier): Promise<string> => {
           const result = await this.delete(resource, { id, meta });
           return result.data.id;
         }),
@@ -110,7 +110,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
     async updateMany<RecordType extends RaRecord>(resource: string, params: UpdateManyParams): Promise<UpdateManyResult<RecordType>> {
       const { ids, data, meta } = params;
       const updated = await Promise.all(
-        (ids || []).map(async (id): Promise<string> => {
+        (ids || []).map(async (id: Identifier): Promise<string> => {
           const result = await this.update(resource, { id, data, previousData: {}, meta });
           return result.data.id;
         }),

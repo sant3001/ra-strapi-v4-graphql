@@ -1,11 +1,15 @@
 {
   "name": "ra-strapi-v4-graphql",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React Admin GraphQL data provider for Strapi.js v4",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "scripts": {
-    "build": "tsc -b",
+    "build": "npm run build-cjs && yarn run build-esm",
+    "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
+    "build-esm": "rimraf ./dist/esm && tsc --outDir dist/esm --module es2022",
+    "watch": "tsc --outDir dist/esm --module es2022 --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "eslint ./src/ --ext ts,tsx --fix --report-unused-disable-directives",
@@ -31,6 +35,7 @@
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "3.0.3",
+    "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -46,5 +51,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/sant3001/ra-strapi-v4-graphql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sant3001/ra-strapi-v4-graphql/issues"
   }
 }
