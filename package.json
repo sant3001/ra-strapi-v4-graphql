@@ -1,11 +1,12 @@
 {
   "name": "ra-strapi-v4-graphql",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Admin GraphQL data provider for Strapi.js v4",
-  "main": "index.ts",
+  "main": "lib/index.js",
   "types": "index.ts",
   "scripts": {
     "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "eslint ./src/ --ext ts,tsx --fix --report-unused-disable-directives",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -42,5 +43,9 @@
   "peerDependencies": {
     "ra-core": "^4.15.0",
     "react-query": "^3.32.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sant3001/ra-strapi-v4-graphql.git"
   }
 }

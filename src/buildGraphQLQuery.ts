@@ -73,7 +73,10 @@ export const buildAndRequestGraphQLQuery = async <TResult>(opts: BuildGraphQLQue
           __variables,
           [queryName]: {
             __args,
-            data: { id: true, attributes: fields },
+            data: {
+              id: true, // always include ID
+              ...(fields && Object.keys(fields).length > 0 ? { attributes: fields } : {}),
+            },
             ...(isCollection ? { meta: { pagination: { total: true } } } : {}),
           },
         },

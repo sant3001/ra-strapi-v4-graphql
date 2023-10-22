@@ -39,7 +39,7 @@ export interface BuildAuthProviderOptions {
 }
 
 export interface BuildDataProviderOptions {
-  defaultFields?: JSONFields;
+  defaultFields?: Record<string, JSONFields>;
 }
 
 export type JSONFields = { [key: string]: true | JSONFields };
@@ -123,7 +123,7 @@ export interface BuildGraphQLQueryOpts {
   resource: string;
   isCollection?: boolean;
   variables: Variables;
-  fields: JSONFields;
+  fields?: JSONFields;
   operation?: Operation;
 }
 

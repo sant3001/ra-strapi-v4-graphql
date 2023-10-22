@@ -21,7 +21,7 @@ import type {
   UpdateParams,
   UpdateResult,
 } from 'ra-core';
-import { BuildDataProvider, BuildGraphQLQueryOpts, EntityResponse, EntityResponseCollection, Operation } from './types';
+import { BuildDataProvider, BuildGraphQLQueryOpts, EntityResponse, EntityResponseCollection, JSONFields, Operation } from './types';
 import { buildAndRequestGraphQLQuery } from './buildGraphQLQuery';
 
 export const buildDataProvider: BuildDataProvider = (options) => {
@@ -33,7 +33,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
       params: CreateParams,
     ): Promise<CreateResult<ResultRecordType>> {
       const { data, meta } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { data: { publishedAt: new Date(), ...data } };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, variables, fields, operation: Operation.Create };
       const response = await buildAndRequestGraphQLQuery<EntityResponse<ResultRecordType>>(opts);
@@ -41,7 +41,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
     },
     async delete<RecordType extends RaRecord>(resource: string, params: DeleteParams<RecordType>): Promise<DeleteResult<RecordType>> {
       const { id, meta } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { id };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, variables, fields, operation: Operation.Delete };
       const response = await buildAndRequestGraphQLQuery<EntityResponse<RecordType>>(opts);
@@ -63,7 +63,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
         sort: { field, order },
         meta,
       } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { sort: [`${field}:${order}`], pagination: { page, pageSize: perPage } };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, isCollection: true, variables, fields };
       const result = await buildAndRequestGraphQLQuery<EntityResponseCollection<RecordType>>(opts);
@@ -74,7 +74,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
     },
     async getMany<RecordType extends RaRecord>(resource: string, params: GetManyParams): Promise<GetManyResult<RecordType>> {
       const { ids, meta } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { filters: { id: { in: ids } } };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, isCollection: true, variables, fields };
       const result = await buildAndRequestGraphQLQuery<EntityResponseCollection<RecordType>>(opts);
@@ -90,7 +90,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
     },
     async getOne<RecordType extends RaRecord>(resource: string, params: GetOneParams<RecordType>): Promise<GetOneResult<RecordType>> {
       const { id, meta } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { id };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, variables, fields };
       const { data } = await buildAndRequestGraphQLQuery<EntityResponse<RecordType>>(opts);
@@ -101,7 +101,7 @@ export const buildDataProvider: BuildDataProvider = (options) => {
         data: { id, ...data },
         meta,
       } = params;
-      const { fields = defaultFields } = meta || {};
+      const fields: JSONFields | undefined = meta?.fields || defaultFields?.[resource];
       const variables = { id, data };
       const opts: BuildGraphQLQueryOpts = { graphQLUrl, resource, variables, fields, operation: Operation.Update };
       const response = await buildAndRequestGraphQLQuery<EntityResponse<RecordType>>(opts);
