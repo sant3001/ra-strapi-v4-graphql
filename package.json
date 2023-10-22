@@ -1,9 +1,9 @@
 {
   "name": "ra-strapi-v4-graphql",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React Admin GraphQL data provider for Strapi.js v4",
   "main": "lib/index.js",
-  "types": "index.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -b",
     "typecheck": "tsc --noEmit",
@@ -37,7 +37,6 @@
     "graphql-request": "^6.1.0",
     "json-to-graphql-query": "^2.2.5",
     "lodash.camelcase": "^4.3.0",
-    "lodash.startcase": "^4.4.0",
     "pluralize": "^8.0.0"
   },
   "peerDependencies": {
